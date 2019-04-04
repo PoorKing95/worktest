@@ -1,0 +1,270 @@
+{% load static %}
+<!-- 用于论文的信息录入 -->
+<!DOCTYPE html>
+<html>
+
+<head>
+    
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="robots" content="all,follow">
+
+    <title>成果管理系统</title>
+    <link rel="shortcut icon" href="/static/img/favicon.ico">
+    
+    <!-- global stylesheets -->
+    <link href="https://fonts.googleapis.com/css?family=Roboto+Condensed" rel="stylesheet">
+{#    <link rel="stylesheet" href="/static/css/bootstrap.min.css">#}
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+    <link rel="stylesheet" href="/static/font-awesome-4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/static/css/font-icon-style.css">
+    <link rel="stylesheet" href="/static/css/style.default.css" id="theme-stylesheet">
+
+    <!-- Core stylesheets -->
+    <link rel="stylesheet" href="/static/css/form.css">
+    <link rel="stylesheet" href="/static/css/pages/login.css">
+</head>
+
+<body>
+        
+<!--====================================================
+                     MAIN NAVBAR
+======================================================-->
+{% if not request.session.uall %}
+{% include 'login/base-uall.html' %}
+{% else %}
+{% include 'login/base.html' %}
+{% endif %}
+
+<!--====================================================
+                    PAGE CONTENT
+======================================================-->
+    <div class="page-content d-flex align-items-stretch">
+       
+        <!--***** SIDE NAVBAR *****-->
+        {% if not request.session.uall %}
+        {% include 'login/base1-uall.html' %}
+        {% else %}
+        {% include 'login/base1.html' %}
+        {% endif %}
+
+        <div class="content-inner form-cont">
+            <div class="row">
+                <div class="col-md-12">
+
+                    <!--***** BASIC FORM *****-->
+                    {% verbatim %}
+                    <div class="card form" id="form">
+                        <div class="card-header">
+                            <h3 class="offset-md-3">新建作者</h3>
+                        </div>
+                        <br>
+                        <form id="" method="POST" action="/polls/new-author2" @submit="checkForm">
+                            <div class="row">
+                                <div class="col-md-6 offset-md-3">
+                                    <div class="form-group">
+                                        <label for="exampleInputEmail1"><b>个人信息：</b></label>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="exampleInputEmail1">中文名</label>
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <input type="text" class="form-control " id="" aria-describedby="emailHelp"
+                                            placeholder="姓" name="alnamech" required>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <input type="text" class="form-control " id="" aria-describedby="emailHelp"
+                                            placeholder="名" name="afnamech" required>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="exampleInputEmail1">English Name（英文名）</label>
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <input type="text" class="form-control " id="" aria-describedby="emailHelp"
+                                            placeholder="First name" name="afnameen" required>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <input type="text" class="form-control " id="" aria-describedby="emailHelp"
+                                            placeholder="Last name" name="alnameen" required>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="exampleInputEmail1">邮箱：</label>
+                                        <input type="text" class="form-control" id="" aria-describedby="emailHelp"
+                                        placeholder="邮箱地址" name="amail" required>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6 offset-md-3">
+                                    <div class="form-group">
+                                        <label for="exampleInputEmail1"><b>单位信息：</b></label>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="exampleInputEmail1">一级单位中文名：</label>
+                                        <input type="text" class="form-control" id="" aria-describedby="emailHelp" 
+                                        placeholder="大学、科学院、研究所等机构" name="cnamech1" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="exampleInputEmail1">University/Academy of sciences/research institution：</label>
+                                        <input type="text" class="form-control" id="" aria-describedby="emailHelp" 
+                                        placeholder="please input your University/Academy of sciences/research institution" name="cnameen1" required>
+                                    </div>
+                                    <div class="form-group">
+                                            <label for="exampleInputEmail1">二级单位中文名：</label>
+                                            <input type="text" class="form-control" id="" aria-describedby="emailHelp" 
+                                            placeholder="学院、部门等" name="cnamech2" required>
+                                        </div>
+                                    <div class="form-group">
+                                        <label for="exampleInputEmail1">College/Department：</label>
+                                        <input type="text" class="form-control" id="" aria-describedby="emailHelp" 
+                                        placeholder="please input your College/Department" name="cnameen2" required>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-6 offset-md-3">
+                                    <div class="form-group">
+                                        <label for="exampleInputEmail1"><b>单位地址：</b></label>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="country">国家(Country)</label>
+                                        <select class="form-control" v-model="selectCountry" name="country" required>
+                                            <option value="no" selected disabled>-=请选择/Select=-</option>
+                                            <option v-for="country in countries">{{ country }}</option>
+                                        </select>
+                                    </div>
+                                    <div class="row" v-show="selectCountry == '中国'">
+                                        <div class="form-group col-md-4">
+                                            <label for="exampleSelect1">省/自治区/直辖市</label>
+                                            <select class="form-control" v-model="selectProvince" name="province" :required="selectCountry == '中国'">
+                                                <option value="no" selected disabled :value="-1">-=省/自治区/直辖市=-</option>
+                                                <option v-for="province, i in provinces" :value="i">{{ province.province }}</option>
+                                            </select>
+                                        </div>
+                                        <div class="form-group col-md-4">
+                                            <label for="exampleSelect1">市</label>
+                                            <select class="form-control" v-model="selectCity" name="city" :required="selectCountry == '中国'">
+                                                <option value="no" selected disabled :value="-1">-=市/区=-</option>
+                                                <option v-for="city, i in cities" :value="i">{{ city.name }}</option>
+                                            </select>
+                                        </div>
+                                        <div class="form-group col-md-4">
+                                            <label for="exampleSelect1">区/县</label>
+                                            <select class="form-control" id="area" v-model="selectArea" name="area" :required="selectCountry == '中国'">
+                                                <option value="no" selected disabled :value="-1">-=区/县=-</option>
+                                                <option v-for="area, i in areas" :value="i">{{ area }}</option>
+                                            </select>
+                                        </div>
+                                        <div class="form-group col-md-12" >
+                                            <label for="exampleInputEmail1">详细地址</label>
+                                            <input type="text" class="form-control" id="" aria-describedby="emailHelp"
+                                            placeholder="详细地址" name="addressch" :required="selectCountry == '中国'">
+                                        </div>
+                                    </div>
+                                    <div class="form-group message_hidden" v-show="selectCountry != '中国'">
+                                        <label for="exampleInputEmail1">Your institution's address</label>
+                                        <input type="text" class="form-control" id="" aria-describedby="emailHelp"
+                                        placeholder="please input your College/Department" name="addressen" :required="selectCountry != '中国'">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="exampleInputEmail1">邮政编码(zip code)</label>
+                                        <input type="text" class="form-control" id="" aria-describedby="emailHelp"
+                                        placeholder="邮政编码(zip code)" name="czipcode" required>
+                                    </div>
+                                </div>
+                            </div>
+                            {% endverbatim %}
+                            <div class="row" style="color: red;">
+                                <span class="col-md-6 offset-md-3">{{ err_msg }}</span>
+
+                            </div>
+                            {% csrf_token %}
+                            {% verbatim %}
+
+                            <div class="row">
+                                <div class="col-md-6 text-md-center text-sm-left offset-md-3"><button type="submit" class="btn btn-general btn-blue">提&nbsp;&nbsp;&nbsp;&nbsp;交</button></div>
+
+                            </div>
+                              
+                        </form>
+                    </div>
+                    {% endverbatim %}
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    
+   
+    
+    <!--Global Javascript -->
+    <script src="{% static 'polls/js/jquery.min.js' %}"></script>
+    <script src="{% static 'polls/js/popper/popper.min.js' %}"></script>
+    <script src="{% static 'polls/js/tether.min.js' %}"></script>
+    <script src="{% static 'polls/js/bootstrap.min.js' %}"></script>
+    <script src="{% static 'polls/js/jquery.cookie.js' %}"></script>
+    <script src="{% static 'polls/js/jquery.validate.min.js' %}"></script>
+    <script src="{% static 'polls/js/chart.min.js' %}"></script>
+    <script src="{% static 'polls/js/front.js' %}"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.5.21/dist/vue.js"></script>
+    <script src="{% static 'polls/js/location-data.js' %}"></script>
+    <script>
+        var afnamech = "{{ data.afnamech }}"
+        var alnamech = "{{ data.alnamech }}"
+        var afnameen = "{{ data.afnameen }}"
+        var alnameen = "{{ data.alnameen }}"
+        var amail = "{{ data.amail }}"
+        var cnamech1 = "{{ data.cnamech1 }}"
+        var cnamech2 = "{{ data.cnamech2 }}"
+        var cnameen1 = "{{ data.cnameen1 }}"
+        var cnameen2 = "{{ data.cnameen2 }}"
+        var czipcode = "{{ data.czipcode }}"
+        // {#var country = "{{ country }}"#}
+        // {#province = forms.IntegerField(required=False)#}
+        // {#city = forms.IntegerField(required=False)#}
+        // {#area = forms.IntegerField(required=False)#}
+        var addressch = "{{ data.addressch }}"
+        var addressen = "{{ data.addressen }}"
+    </script>
+    <script src="{% static 'polls/js/new-author.js' %}"></script>
+    <!--Core Javascript -->
+    <script>
+    $(function(){
+        $('#leftmenu').children().eq(1).css('background-color','rgb(211, 229, 236)')
+    });
+    new Chart(document.getElementById("myChart-nav").getContext('2d'), {
+        type: 'doughnut',
+        data: {
+        labels: ["M", "T", "W", "T", "F", "S", "S"],
+        datasets: [{
+            backgroundColor: [
+            "#2ecc71",
+            "#3498db",
+            "#95a5a6",
+            "#9b59b6",
+            "#f1c40f",
+            "#e74c3c",
+            "#34495e"
+            ],
+            data: [12, 19, 3, 17, 28, 24, 7]
+        }]
+        },
+        options: {
+            legend: { display: false },
+            title: {
+            display: true,
+            text: ''
+            } 
+        }
+    });
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,45 @@
+<h3>POST 提交数据：</h3>
+    <input type="number" id="num_post1" />&nbsp;*&nbsp;
+    <input type="number" id="num_post2" />
+    <button id="sub">&nbsp;=&nbsp;</button>
+    <font style="color:red;"><span id="result_post"></span></font>
+		<hr />
+<script src="/static/js/jquery.min.js"></script>
+<script>
+	$("#num_post2").bind("input propertychange", function () {
+		var a = $("#num_post1").val();
+    var b = $("#num_post2").val();
+    $.ajax({
+        type : 'post',
+        url : '/check/',
+        dataType : 'json',
+        data : {
+            a: a,
+            b: b
+        },
+        success : function(ret) {
+            $('#result_post').html(ret.result);
+        },
+        error : function(err) {
+        }
+    });		
+	});
+	$('#num_post2').blur(function(){
+		// var a = $("#num_post1").val();
+    // var b = $("#num_post2").val();
+    // $.ajax({
+    //     type : 'post',
+    //     url : '/check/',
+    //     dataType : 'json',
+    //     data : {
+    //         a: a,
+    //         b: b
+    //     },
+    //     success : function(ret) {
+    //         $('#result_post').html(ret.result);
+    //     },
+    //     error : function(err) {
+    //     }
+    // });
+	});
+</script>
